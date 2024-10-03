@@ -1,3 +1,7 @@
+'use strict'
+
+const moment = require('./moment')
+
 const help = ` 
 The application takes in three parameters which must be in following format: 
 
@@ -7,15 +11,16 @@ The application takes in three parameters which must be in following format:
 
 For instance a loan of 100 000 with 6% yearly interest with 12 months of payment time will look like this 
 
-    node morgage 100000 6 12
+    node mortgage 100000 6 12
 `;
 
-const [ principal, rate, term ] = process.argv.slice(-3)
+const [ principal, rate, term ] = process.argv.slice(-3);
+
 
 let error;
 
 if(isNaN(principal) || Number(principal)  <= 0) {
-  error = 'Principal must be a posittive number greater then zero!';
+  error = 'Principal must be a positive number greater then zero!';
 }
 if(isNaN(rate) || Number(rate)  < 0) {
   error = 'Rate must be a positive number!';
@@ -43,10 +48,11 @@ const monthlyPayment = (irNTerm * principal * r / (irNTerm - 1));
 let currentPrincipal = Number(principal);
 
 for (let i = 1; i <= term; i++) {
+  const currentDate = moment().add(i, 'M');
   const interest = currentPrincipal * r;
   const amortization =  monthlyPayment - interest
 
-  console.log(`${i} ${interest.toFixed(2)} ${amortization.toFixed(2)}  ${currentPrincipal.toFixed(2)}`);
+  console.log(`${i} ${currentDate.format('YYYY-MM-DD')} ${currentPrincipal.toFixed(2)} ${interest.toFixed(2)} ${amortization.toFixed(2)}`);
 
   currentPrincipal -= amortization;
 }
