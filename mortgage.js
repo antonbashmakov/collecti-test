@@ -39,11 +39,13 @@ if(error) {
 /*
 * Normalized rate. Part of rate payed each period, decimal e.g. rate of 6% is  0.06 / 12 = 0.005
 */
-const r = rate / 12 / 100;  
+const r = rate / 12 / 100; 
 const ir = 1 + r;   
 const  irNTerm = ir ** term;
 
-const monthlyPayment = (irNTerm * principal * r / (irNTerm - 1));
+
+
+const monthlyPayment = r ? (irNTerm * principal * r / (irNTerm - 1)) : principal / term;
 
 let currentPrincipal = Number(principal);
 
