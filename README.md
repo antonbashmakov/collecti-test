@@ -6,9 +6,9 @@ The result of running this application will me a mortgage schema in a table form
 
 The application takes in three parameters which must be in following format: 
 
-principal - a positive number greater then zero
-rate - a positive number, zero allowed
-term - a positive number greater then zero
+```principal``` - a positive number greater then zero
+```rate``` - a positive number, zero allowed
+```term``` - a positive number greater then zero
 
 For instance a loan of 100 000 with 6% yearly interest with 12 months of payment time will look like this 
 
